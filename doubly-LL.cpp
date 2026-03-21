@@ -42,4 +42,7 @@ struct Node {
  int main() {
     Node* head = NULL;
     insertAthead(head,20);
+    insertAttail(head,10);
+    cout << "Linked List: ";
+    display(head); 
  }
