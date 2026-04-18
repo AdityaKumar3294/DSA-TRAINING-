@@ -38,19 +38,55 @@ void levelOrderTraversal(node* root) {
         node* temp = q.front();
         cout << temp -> data << " ";
         q.pop();
-        if (temp -> left) {
-            q.push(temp ->left);
+        
+        if (temp == NULL) {
+            cout << endl;
+            if (!q.empty()) {
+                q.push(NULL);
+            }
         }
-        if (temp -> right) {
-            q.push(temp -> right);
-        }
+        else {
+            if (temp -> left) {
+                q.push(temp ->left);
+            }
 
+            if (temp -> right) {
+                q.push(temp -> right);
+            }
+        }
     }
+}
+
+void inOrderTraversal(node* root) {
+    if (root == NULL) return;
+    inOrderTraversal(root -> left);
+    cout << root -> data << " ";
+    inOrderTraversal(root -> right);
+}
+
+void preOrderTraversal(node* root) {
+    if (root == NULL) return;
+    cout << root -> data << " ";
+    preOrderTraversal(root -> left);
+    preOrderTraversal(root -> right);
+}
+
+void postOrderTraversal(node* root) {
+    if (root == NULL) return;
+    postOrderTraversal(root -> left);
+    postOrderTraversal(root -> right);
+    cout << root -> data << " ";
 }
 
 int main() {
     node* root = NULL;
     root = buildTree(root);
     levelOrderTraversal(root);
+    cout << endl;
+    inOrderTraversal(root);
+    cout << endl;
+    preOrderTraversal(root);
+    cout << endl;
+    postOrderTraversal(root);
     return 0;
 }
