@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class node {
@@ -18,10 +19,10 @@ node* buildTree (node* root) {
     cout << "Enter the data for the node: " << endl;
     int data;
     cin >> data;
-    root = new node(data);
     if (data == -1) {
         return NULL;
     }
+    root = new node(data);
     cout << "Enter the data for the left of " << data << endl;
     root -> left = buildTree(root -> left);
     cout << "Enter the data for the right of " << data << endl;
@@ -29,9 +30,27 @@ node* buildTree (node* root) {
     return root;
 }
 
+void levelOrderTraversal(node* root) {
+    if (root == NULL) return;
+    queue<node*> q;
+    q.push(root);
+    while (!q.empty()) {
+        node* temp = q.front();
+        cout << temp -> data << " ";
+        q.pop();
+        if (temp -> left) {
+            q.push(temp ->left);
+        }
+        if (temp -> right) {
+            q.push(temp -> right);
+        }
+
+    }
+}
 
 int main() {
     node* root = NULL;
     root = buildTree(root);
+    levelOrderTraversal(root);
     return 0;
 }
